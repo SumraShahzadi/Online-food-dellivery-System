@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <head>
+        <title></WIildlife>GOBBLE BEAR-FOOD RESTURANT</title>
+       
+        <link rel="stylesheet" href="style.css">
+        <style>
+            *{margin: 0;
+padding:0}
+.navbar{
+    position: sticky;
+    background-color: darkgreen;
+    height:170px
+
+    }
+    .logo{
+        height:100px;border: 2px solid white;border-radius: 20px;margin: 30px;
+    }
+    div ul{
+        display: flex;padding: auto;margin: auto;justify-content: space-between;
+    }
+    div ul li {list-style-type: none;margin: auto;margin-left: 5px;
+
+    }
+    div ul li a{
+        text-decoration: none;margin: 20px;color: white;font-size: 40px;
+    }
+    .addtocart{
+        margin-left :600px;margin-top: 60px;color: white;
+    }
+   
+    .btn1{
+        background-color: chartreuse;color: black;border: 2px solid white;border-radius: 5px;
+        height: 50px;width: 100px;margin-left: 20px;margin-top: 70px;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+.sectionimg {
+  background-image: url('https://plus.unsplash.com/premium_photo-1700412978337-d2f1ec5fd693?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE2fHx8ZW58MHx8fHx8');
+  background-size: cover;
+  background-position: center;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 40px;
+  opacity: 10;
+}
+
+.sectionimg span {
+  text-align: center;
+  font-size: 40px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  background-color: chartreuse;
+}
+
+.menu-item {
+  display: flex;margin-bottom: 10px;background-color:whitesmoke;
+border: 6px solid darkgreen;padding: 2px;}
+
+.menu-item img {
+  width: 200px; 
+  height: 150px; object-fit: cover;
+  border-radius: 10px;
+}
+
+.menu-content {
+  margin-left: 20px;
+}
+
+.menu-content h2 {
+  font-size: 33px;
+  font-weight: bold;
+  color: #333;
+}
+
+.menu-content p {
+  font-size: 24px;
+  color: #666;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+@media screen  and (max-width:600px){
+            .navbar ul{
+                display: flex ;
+                flex-direction:column;
+                background-color:yellow
+            }
+            .logo {
+    height: 50px; /* reduce the logo size */
+    width: auto;
+  }
+  .addtocart {
+    margin-left: 40px; 
+    text-align: left;
+  }
+  .addtocart img {
+    width: 20px;
+    height: auto;
+  }
+  
+  .sectionimg {
+    height: 200px; /* reduce the height of the section image */
+    background-size: cover;
+    background-position: center;
+  }
+  .sectionimg h1 {
+    font-size: 24px; /* reduce the font size of the heading */
+  }
+  .sectionimg p {
+    font-size: 18px; /* reduce the font size of the paragraph */
+  }
+  .menu {
+    display: flex;
+    flex-direction: column;
+  }
+  .menu-item {
+    display: flex;
+    flex-direction: column; /* stack the menu items vertically */
+    margin-bottom: 10px;
+  }
+  .menu-item img {
+    width: 100%; /* make the image full width */
+    height: 150px; /* reduce the height of the image */
+  }
+  .menu-content {
+    margin-left: 0; /* remove the left margin */
+  }
+  .menu-content h2 {
+    font-size: 18px; /* reduce the font size of the heading */
+  }
+  .menu-content p {
+    font-size: 14px; /* reduce the font size of the paragraph */
+  }
+}
+
+
+
+</style>
+</head>
+<body>
+    <div class="navbar">
+        <nav>
+            
+                <ul>
+                    <img class="logo" src="Wildlife.png" alt="logo">
+                    
+                    <li><a href="#home">HOME</a></li>
+                    <li><a href="#menu">MENU</a></li>
+                    <li><a href="#abou us">ABOUT US</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                    <div class="addtocart">
+                        <img src="pngimg.com - shopping_cart_PNG13.png" sizes="2px" alt="cart">
+
+                    </div>
+                    <button class="btn btn1">LOGIN IN</button>
+                </ul>
+            
+        </nav>
+    </div>
+    <section>
+        <div  class="sectionimg">
+            <span>
+                <h1>Delicious and QUICK - Gobble Bear</h1>
+                <p>Cuteness served with every bite, effortless ordering always</p>
+            </span>         
+            
+        </div>
+    
+    </section>
+    <div class="menu">
+        
+        <div class="menu-item">
+            
+            <img src="burger.jpg" alt="burger">
+            <div class="menu-content"><h2>Burger</h2>
+                <p>juicy, flame-grilled patty with fresh veggies and special sauce, served in a soft bun. A classic favorite for a quick, satisfying meal.</p></div>
+            </div>
+        <div class="menu-item">
+            
+            <img src="pizza2.jpg" alt="burger">
+            <div class="menu-content">
+            <h2>Pizza</h2>
+            <p>Freshly baked with a crispy crust, topped with rich tomato sauce, melted cheese, and your favorite toppings. A delicious choice for any craving.</p></div>
+        </div>
+        <div class="menu-item">
+            
+            <img src="chicken.jpg" alt="burger">
+            <div class="menu-content">
+            <h2>Chicken</h2>
+            <p>Crispy, golden-brown chicken with a perfectly seasoned coating. Juicy on the inside, crunchy on the outside—ideal for a hearty meal.</p></div>
+        </div>
+        <div class="menu-item">
+            
+            <img src="drinks.jpg" alt="burger">
+            <div class="menu-content">
+            <h2>Drinks</h2>
+            <p>Refreshing beverages including sodas, juices, and chilled shakes. The perfect way to complement your meal and quench your thirst.</p></div>
+        </div>
+        <div class="menu-item">
+            
+            <img src="karahi.jpg" alt="burger">
+            <div class="menu-content">
+            <h2>Karahi</h2>
+            <p>Spicy, aromatic curry cooked with tender meat, tomatoes, and green chilies. Best enjoyed with naan or steamed rice for an authentic taste.</p></div>
+        </div>
+    </div>
+    <div class="Story">
+
+    </div>
+
+    
+</body>
+</html>
