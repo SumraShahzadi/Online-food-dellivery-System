@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <style>
+        body {
+            background-color: darkgreen;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .signup-container {
+            background-color: rgba(0, 100, 0, 0.9);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 20px 10px 50px rgb(25, 170, 5);
+            width: 400px;
+            color: white;
+            border: 4px ridge white;
+        }
+
+        .signup-container h2 {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            letter-spacing: 1.5px;
+        }
+
+        label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="address"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            background-color: rgb(4, 250, 82);
+            color: white;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .gender-group {
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .buttons button {
+            background-color: rgb(3, 209, 3);
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .buttons button:hover {
+            background-color: rgb(0, 180, 0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form>
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Your Name">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="you@example.com">
+
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Create a password">
+
+            <label for="Phone">Phone Number</label>
+            <input type="number" id="password" placeholder="Enter Your NUmber">
+
+            <label for="address">Address</label>
+            <input type="text" id="address" placeholder="Your Address">
+
+            <div class="gender-group">
+                <label>Gender</label>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male" style="display:inline;">Male</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female" style="display:inline;">Female</label>
+                <input type="radio" id="other" name="gender" value="other">
+                <label for="other" style="display:inline;">Other</label>
+            </div>
+
+            <div class="buttons">
+                <button type="submit">Sign Up</button>
+                <button type="button" onclick="window.location.href='login.html'">Sign In</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
