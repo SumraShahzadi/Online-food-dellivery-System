@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-// Register new user
+// Register endpoint
 router.post('/register', async (req, res) => {
     try {
-        const { name, email, password, address, phone } = req.body;
+        const { name, email, password, phone, address, gender } = req.body;
 
-        // Check if user already exists
+        // Check if user exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });
@@ -18,21 +19,24 @@ router.post('/register', async (req, res) => {
         const user = new User({
             name,
             email,
-            password,
+            password, // Password will be hashed by the pre-save middleware
+            phone,
             address,
-            phone
+            gender
         });
 
+        // Save user to database
         await user.save();
 
-        // Generate token
+        // Create token
         const token = jwt.sign(
-            { userId: user._id },
+            { userId: user._id, email: user.email },
             process.env.JWT_SECRET || 'your-secret-key',
             { expiresIn: '24h' }
         );
 
         res.status(201).json({
+            message: 'User registered successfully',
             token,
             user: {
                 id: user._id,
@@ -42,11 +46,12 @@ router.post('/register', async (req, res) => {
             }
         });
     } catch (error) {
-        res.status(500).json({ message: 'Error creating user', error: error.message });
+        console.error('Registration error:', error);
+        res.status(500).json({ message: 'Error registering user', error: error.message });
     }
 });
 
-// Login user
+// Login endpoint
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -58,28 +63,32 @@ router.post('/login', async (req, res) => {
         }
 
         // Check password
-        const isMatch = await user.comparePassword(password);
-        if (!isMatch) {
+        const validPassword = await user.comparePassword(password);
+        if (!validPassword) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
-        // Generate token
+        // Create token
         const token = jwt.sign(
-            { userId: user._id },
+            { userId: user._id, email: user.email },
             process.env.JWT_SECRET || 'your-secret-key',
             { expiresIn: '24h' }
         );
 
         res.json({
+            message: 'Login successful',
             token,
             user: {
                 id: user._id,
                 name: user.name,
                 email: user.email,
-                role: user.role
+                role: user.role,
+                phone: user.phone,
+                address: user.address
             }
         });
     } catch (error) {
+        console.error('Login error:', error);
         res.status(500).json({ message: 'Error logging in', error: error.message });
     }
 });

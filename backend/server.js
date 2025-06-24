@@ -5,9 +5,10 @@ const dotenv = require('dotenv');
 
 // Import routes
 const authRoutes = require('./routes/auth.routes');
-// const menuRoutes = require('./routes/menu.routes');
-// const orderRoutes = require('./routes/order.routes');
-// const cartRoutes = require('./routes/cart.routes');
+const menuRoutes = require('./routes/menu.routes');
+const orderRoutes = require('./routes/order.routes');
+const cartRoutes = require('./routes/cart.routes');
+const userRoutes = require('./routes/user.routes');
 
 // Configure environment variables
 dotenv.config();
@@ -26,16 +27,24 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/gobble-be
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('MongoDB connection error:', err));
 
+// Basic test route
+app.get('/api/test', (req, res) => {
+    res.json({ message: 'Backend server is running!' });
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
+
+// Enable all routes
 app.use('/api/menu', menuRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/users', userRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Something broke!');
+    res.status(500).json({ message: 'Something broke!', error: err.message });
 });
 
 const PORT = process.env.PORT || 5000;

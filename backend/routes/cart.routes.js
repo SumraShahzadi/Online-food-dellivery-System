@@ -36,7 +36,7 @@ router.post('/add', auth, async (req, res) => {
 
         // Check if item already exists in cart
         const existingItemIndex = cart.items.findIndex(
-            item => item.menuItem.toString() === menuItemId && item.variant === variant
+            item => item.menuItem.toString() === menuItemId && item.variant === (variant || null)
         );
 
         if (existingItemIndex > -1) {
@@ -47,17 +47,14 @@ router.post('/add', auth, async (req, res) => {
             cart.items.push({
                 menuItem: menuItemId,
                 quantity,
-                variant
+                variant: variant || null
             });
         }
 
         // Calculate total amount
         await cart.populate('items.menuItem');
         cart.totalAmount = cart.items.reduce((total, item) => {
-            const price = item.variant && item.menuItem.variants.find(v => v.name === item.variant)
-                ? item.menuItem.variants.find(v => v.name === item.variant).price
-                : item.menuItem.price;
-            return total + (price * item.quantity);
+            return total + (item.menuItem.price * item.quantity);
         }, 0);
 
         await cart.save();
@@ -91,10 +88,7 @@ router.patch('/update/:itemId', auth, async (req, res) => {
         // Recalculate total amount
         await cart.populate('items.menuItem');
         cart.totalAmount = cart.items.reduce((total, item) => {
-            const price = item.variant && item.menuItem.variants.find(v => v.name === item.variant)
-                ? item.menuItem.variants.find(v => v.name === item.variant).price
-                : item.menuItem.price;
-            return total + (price * item.quantity);
+            return total + (item.menuItem.price * item.quantity);
         }, 0);
 
         await cart.save();
@@ -118,10 +112,7 @@ router.delete('/remove/:itemId', auth, async (req, res) => {
         // Recalculate total amount
         await cart.populate('items.menuItem');
         cart.totalAmount = cart.items.reduce((total, item) => {
-            const price = item.variant && item.menuItem.variants.find(v => v.name === item.variant)
-                ? item.menuItem.variants.find(v => v.name === item.variant).price
-                : item.menuItem.price;
-            return total + (price * item.quantity);
+            return total + (item.menuItem.price * item.quantity);
         }, 0);
 
         await cart.save();

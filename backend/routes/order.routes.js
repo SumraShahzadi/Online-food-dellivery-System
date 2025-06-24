@@ -48,7 +48,7 @@ router.patch('/:id/status', adminAuth, async (req, res) => {
         const { status } = req.body;
         const order = await Order.findByIdAndUpdate(
             req.params.id,
-            { status },
+            { orderStatus: status },
             { new: true, runValidators: true }
         );
         if (!order) {
@@ -93,6 +93,18 @@ router.delete('/:id', auth, async (req, res) => {
         res.json({ message: 'Order cancelled successfully' });
     } catch (error) {
         res.status(500).json({ message: 'Error cancelling order', error: error.message });
+    }
+});
+
+// Get total orders and total revenue (admin only)
+router.get('/stats', adminAuth, async (req, res) => {
+    try {
+        const totalOrders = await Order.countDocuments();
+        const orders = await Order.find();
+        const totalRevenue = orders.reduce((sum, order) => sum + (order.totalAmount || 0), 0);
+        res.json({ totalOrders, totalRevenue });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching order stats', error: error.message });
     }
 });
 

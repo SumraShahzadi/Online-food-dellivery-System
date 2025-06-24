@@ -3,12 +3,18 @@ const mongoose = require('mongoose');
 const menuItemSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
-    description: String,
+    description: {
+        type: String,
+        required: true,
+        trim: true
+    },
     price: {
         type: Number,
-        required: true
+        required: true,
+        min: 0
     },
     category: {
         type: String,
@@ -23,12 +29,12 @@ const menuItemSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
-    variants: [{
-        name: String,
-        price: Number
-    }]
-}, {
-    timestamps: true
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 });
 
-module.exports = mongoose.model('MenuItem', menuItemSchema); 
+const MenuItem = mongoose.model('MenuItem', menuItemSchema);
+
+module.exports = MenuItem; 

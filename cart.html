@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Gobble Bear</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #D2B48C;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #D2B48C;
+            padding: 0.5rem 1rem;
+            border-bottom: 2px solid #8B4513;
+        }
+
+        .navbar-brand {
+            padding: 0;
+            position: absolute;
+            left: 15px;
+        }
+
+        .navbar-brand img {
+            height: 60px;
+            border-radius: 15px;
+        }
+
+        .cart-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        .cart-item {
+            border-bottom: 1px solid #dee2e6;
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .item-details {
+            flex-grow: 1;
+            padding: 0 20px;
+        }
+
+        .item-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .item-price {
+            color: #ff9800;
+            font-weight: bold;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background-color: #f57c00;
+        }
+
+        .remove-btn {
+            background-color: #ff5252;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .remove-btn:hover {
+            background-color: #ff1744;
+        }
+
+        .cart-summary {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        .checkout-btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #f57c00;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .empty-cart img {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .continue-shopping {
+            background-color: #ff9800;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .continue-shopping:hover {
+            background-color: #f57c00;
+            color: white;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="projectcode.html">
+                <img src="Images/wildlifelogo.png" alt="Gobble Bear Logo">
+            </a>
+            <a href="projectcode.html" class="btn btn-outline-light">← Back to Menu</a>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="cart-container">
+                    <h2 class="mb-4">Your Cart</h2>
+                    <div id="cart-items">
+                        <div class="loading">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Loading your cart...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="cart-summary">
+                    <h3>Order Summary</h3>
+                    <div class="d-flex justify-content-between mt-3">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">₨ 0</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <span>Delivery Fee:</span>
+                        <span id="delivery-fee">₨ 100</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <strong>Total:</strong>
+                        <strong id="total">₨ 0</strong>
+                    </div>
+                    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import * as cartFunctions from './cart.js?v=1.2';
+
+        let cart = null;
+
+        // Check if user is logged in
+        function checkAuth() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'LOGIN.HTML';
+                return false;
+            }
+            return true;
+        }
+
+        // Display the cart
+        function updateCartDisplay() {
+            const cartContainer = document.getElementById('cart-items');
+            const subtotalElement = document.getElementById('subtotal');
+            const totalElement = document.getElementById('total');
+
+            if (!cart || cart.items.length === 0) {
+                cartContainer.innerHTML = `
+                    <div class="empty-cart">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png" alt="Empty Cart">
+                        <h3>Your cart is empty</h3>
+                        <p>Looks like you haven't added anything to your cart yet.</p>
+                        <a href="projectcode.html" class="continue-shopping">Continue Shopping</a>
+                    </div>
+                `;
+                subtotalElement.textContent = '₨ 0';
+                totalElement.textContent = '₨ 100'; // Just delivery fee
+                return;
+            }
+
+            let subtotal = 0;
+            cartContainer.innerHTML = '';
+
+            cart.items.forEach((item) => {
+                const itemTotal = item.menuItem.price * item.quantity;
+                subtotal += itemTotal;
+
+                cartContainer.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.menuItem.image || 'https://via.placeholder.com/80'}" alt="${item.menuItem.name}" class="item-image">
+                        <div class="item-details">
+                            <div class="item-title">${item.menuItem.name}</div>
+                            <div class="item-price">₨ ${item.menuItem.price}</div>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" data-item-id="${item._id}" data-change="-1">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn" data-item-id="${item._id}" data-change="1">+</button>
+                        </div>
+                        <button class="remove-btn" data-item-id="${item._id}">Remove</button>
+                    </div>
+                `;
+            });
+
+            subtotalElement.textContent = `₨ ${subtotal}`;
+            totalElement.textContent = `₨ ${subtotal + 100}`; // Adding delivery fee
+        }
+
+        // Main function to load and display the cart
+        async function loadCart() {
+            if (!checkAuth()) return;
+            console.log('Fetching cart from backend...');
+            cart = await cartFunctions.getCart();
+            console.log('Cart data received:', cart); // Let's see what the backend returns
+            updateCartDisplay();
+        }
+        
+        // Event delegation for cart actions
+        document.getElementById('cart-items').addEventListener('click', async (event) => {
+            const target = event.target;
+            const itemId = target.dataset.itemId;
+
+            if (target.classList.contains('quantity-btn')) {
+                const change = parseInt(target.dataset.change, 10);
+                const currentItem = cart.items.find(item => item._id === itemId);
+                const newQuantity = currentItem.quantity + change;
+
+                if (newQuantity > 0) {
+                    cart = await cartFunctions.updateCartItemQuantity(itemId, newQuantity);
+                } else {
+                    cart = await cartFunctions.removeCartItem(itemId);
+                }
+                updateCartDisplay();
+            }
+
+            if (target.classList.contains('remove-btn')) {
+                cart = await cartFunctions.removeCartItem(itemId);
+                updateCartDisplay();
+            }
+        });
+
+        // Checkout function
+        window.checkout = function() {
+            if (!cart || cart.items.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            if (checkAuth()) {
+                window.location.href = 'checkout.html';
+            }
+        };
+
+        // Initial load
+        loadCart();
+    </script>
+</body>
+</html> 

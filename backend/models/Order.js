@@ -1,53 +1,73 @@
 const mongoose = require('mongoose');
 
+const orderItemSchema = new mongoose.Schema({
+    menuItem: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'MenuItem',
+        required: true
+    },
+    name: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    quantity: {
+        type: Number,
+        required: true,
+        min: 1
+    }
+});
+
 const orderSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
-    items: [{
-        menuItem: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'MenuItem',
-            required: true
-        },
-        quantity: {
-            type: Number,
-            required: true,
-            min: 1
-        },
-        price: {
-            type: Number,
-            required: true
-        },
-        variant: String
-    }],
+    items: [orderItemSchema],
     totalAmount: {
         type: Number,
-        required: true
-    },
-    status: {
-        type: String,
-        enum: ['pending', 'confirmed', 'preparing', 'ready', 'delivered', 'cancelled'],
-        default: 'pending'
+        required: true,
+        min: 0
     },
     deliveryAddress: {
         type: String,
-        required: true
+        required: true,
+        trim: true
+    },
+    contactNumber: {
+        type: String,
+        required: true,
+        trim: true
     },
     paymentMethod: {
         type: String,
-        enum: ['cash', 'card', 'online'],
-        required: true
+        required: true,
+        enum: ['Cash on Delivery', 'Credit/Debit Card', 'EasyPaisa']
     },
     paymentStatus: {
         type: String,
-        enum: ['pending', 'completed', 'failed'],
-        default: 'pending'
+        enum: ['Pending', 'Paid', 'Failed'],
+        default: 'Pending'
+    },
+    orderStatus: {
+        type: String,
+        enum: ['Pending', 'Confirmed', 'Preparing', 'Out for Delivery', 'Delivered', 'Cancelled'],
+        default: 'Pending'
+    },
+    specialInstructions: {
+        type: String,
+        trim: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
-}, {
-    timestamps: true
 });
 
-module.exports = mongoose.model('Order', orderSchema); 
+const Order = mongoose.model('Order', orderSchema);
+
+module.exports = Order; 

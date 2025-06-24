@@ -149,8 +149,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#cart">
+            <a class="nav-link" href="cart.html">
               <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart" class="cart-icon" />
+              <span id="cart-count" class="badge bg-danger rounded-pill" style="position: absolute; top: 0; right: -5px;">0</span>
             </a>
           </li>
         </ul>
@@ -173,155 +174,7 @@
 
       <!-- Menu Categories -->
       <div class="accordion" id="menuAccordion">
-        <!-- Burger Block -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingBurger">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBurger" aria-expanded="true">
-              Burgers
-            </button>
-          </h2>
-          <div id="collapseBurger" class="accordion-collapse collapse show">
-            <div class="accordion-body row row-cols-1 row-cols-md-3 g-4">
-              <div class="col"><div class="card"><img src="CLASSICCHEESEBURGER.jpeg" class="card-img-top" alt="Classic Cheeseburger"><div class="card-body"><h5 class="card-title">Classic Cheeseburger</h5><p class="card-text">₨ 449</p><button class="btn btn-attractive" onclick="addToCart('Classic Cheeseburger', 449)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="DOUBLEPATTYBURGER.jpeg" class="card-img-top" alt="Spicy Zinger"><div class="card-body"><h5 class="card-title">Spicy Zinger</h5><p class="card-text">₨ 500</p><button class="btn btn-attractive" onclick="addToCart('Spicy Zinger', 500)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="Images/BBQ BEEF BURGER.jpeg" class="card-img-top" alt="BBQ Beef Zinger"><div class="card-body"><h5 class="card-title">BBQ Beef Zinger</h5><p class="card-text">₨ 799</p><button class="btn btn-attractive" onclick="addToCart('BBQ Beef Zinger', 799)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="Images/DOUBLE TROUBLE BURGER.jpeg" class="card-img-top" alt="DOUBLE TROUBLE Zinger"><div class="card-body"><h5 class="card-title">DOUBLE TROUBLE Zinger</h5><p class="card-text">₨ 459</p><button class="btn btn-attractive" onclick="addToCart('DOUBLE TROUBLE Zinger', 459)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="Images/Veggie Delight Burger.jpeg" class="card-img-top" alt="Veggie Delight Burger"><div class="card-body"><h5 class="card-title">Veggie Delight Burger</h5><p class="card-text">₨ 549</p><button class="btn btn-attractive" onclick="addToCart('Veggie Delight Burger', 549)">Add to Cart</button></div></div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Karahi Block -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingKarahi">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKarahi">
-              Karahi
-            </button>
-          </h2>
-          <div id="collapseKarahi" class="accordion-collapse collapse">
-            <div class="accordion-body row row-cols-1 row-cols-md-3 g-4">
-              <div class="col"><div class="card"><img src="Images/BEEF KARHI.jpeg" class="card-img-top" alt="BEEF Karahi"><div class="card-body"><h5 class="card-title">BEEF Karahi</h5><p class="card-text">₨ 2500</p><button class="btn btn-attractive" onclick="addToCart('BEEF Karahi', 2500)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="Images/Chicken Karahi.jpeg" class="card-img-top" alt="CHICKEN Family Pack"><div class="card-body"><h5 class="card-title">CHICKEN Family Pack</h5><p class="card-text">₨ 1199</p><button class="btn btn-attractive" onclick="addToCart('CHICKEN Family Pack', 1199)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="Images/White Karahi.jpeg" class="card-img-top" alt="WHITE Karahi"><div class="card-body"><h5 class="card-title">WHITE Karahi</h5><p class="card-text">₨ 1299</p><button class="btn btn-attractive" onclick="addToCart('WHITE Karahi', 1299)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="Images/VEGETABLE KARAHI.jpeg" class="card-img-top" alt="VEGETABLE Karahi"><div class="card-body"><h5 class="card-title">VEGETABLE Karahi</h5><p class="card-text">₨ 1399</p><button class="btn btn-attractive" onclick="addToCart('VEGETABLE Karahi', 1399)">Add to Cart</button></div></div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Fries Block -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingFries">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFries">
-              Fries
-            </button>
-          </h2>
-          <div id="collapseFries" class="accordion-collapse collapse">
-            <div class="accordion-body row row-cols-1 row-cols-md-3 g-4">
-              <div class="col"><div class="card"><img src="Images/LOADED FRIES.jpeg" class="card-img-top" alt="REGULAR Fries"><div class="card-body"><h5 class="card-title">REGULAR Fries</h5><p class="card-text">₨ 150</p><button class="btn btn-attractive" onclick="addToCart('REGULAR Fries', 150)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="Images/REGULAR FRIES.jpeg" class="card-img-top" alt="LOADED Fries"><div class="card-body"><h5 class="card-title">LOADED Fries</h5><p class="card-text">₨ 300</p><button class="btn btn-attractive" onclick="addToCart('LOADED Fries', 300)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="Images/TRUGFFLE FRIES.jpeg" class="card-img-top" alt="TRUGFFLE Fries"><div class="card-body"><h5 class="card-title">TRUGFFLE Fries</h5><p class="card-text">₨ 249</p><button class="btn btn-attractive" onclick="addToCart('TRUGFFLE Fries', 249)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="Images/SPICY FRIES.jpeg" class="card-img-top" alt="SPICY Fries"><div class="card-body"><h5 class="card-title">SPICY Fries</h5><p class="card-text">₨ 199</p><button class="btn btn-attractive" onclick="addToCart('SPICY Fries', 199)">Add to Cart</button></div></div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Drinks Block -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingDrinks">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDrinks">
-              Drinks
-            </button>
-          </h2>
-          <div id="collapseDrinks" class="accordion-collapse collapse">
-            <div class="accordion-body row row-cols-1 row-cols-md-3 g-4">
-              <div class="col"><div class="card"><img src="Images/pepsi.jpeg" class="card-img-top" alt="Pepsi"><div class="card-body"><h5 class="card-title">Pepsi</h5><p class="card-text">₨ 100</p><button class="btn btn-attractive" onclick="addToCart('Pepsi', 100)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="Images/peachicetea.jpeg" class="card-img-top" alt="Peach ice tea"><div class="card-body"><h5 class="card-title">Peach ice tea</h5><p class="card-text">₨ 249</p><button class="btn btn-attractive" onclick="addToCart('Peach ice tea', 249)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="Images/fanta.jpeg" class="card-img-top" alt="Fanta"><div class="card-body"><h5 class="card-title">Fanta</h5><p class="card-text">₨ 100</p><button class="btn btn-attractive" onclick="addToCart('Fanta', 100)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="Images/mint margreta.jpeg" class="card-img-top" alt="Mint Mardeta"><div class="card-body"><h5 class="card-title">Mint Mardeta</h5><p class="card-text">₨ 199</p><button class="btn btn-attractive" onclick="addToCart('Mint Mardeta', 199)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="Images/OREOSHAKE.jpeg" class="card-img-top" alt="Oreo Shake"><div class="card-body"><h5 class="card-title">Oreo Shake</h5><p class="card-text">₨ 149</p><button class="btn btn-attractive" onclick="addToCart('Oreo Shake', 149)">Add to Cart</button></div></div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pizza Block -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingPizza">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePizza">
-              Pizza
-            </button>
-          </h2>
-          <div id="collapsePizza" class="accordion-collapse collapse">
-            <div class="accordion-body row row-cols-1 row-cols-md-3 g-4">
-              <div class="col">
-                <div class="card">
-                  <img src="Images/Margherita Pizza.jpeg" class="card-img-top" alt="Margherita Pizza">
-                  <div class="card-body">
-                    <h5 class="card-title">Margherita Pizza</h5>
-                    <p class="card-text">Small: ₨ 700<br>Medium: ₨ 1,000<br>Large: ₨ 1,300</p>
-                    <button class="btn btn-attractive" onclick="addToCart('Margherita Pizza', 700)">Add to Cart</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card">
-                  <img src="Images/Pepperoni Feast PIZZA.jpeg" class="card-img-top" alt="Pepperoni Pizza">
-                  <div class="card-body">
-                    <h5 class="card-title">Pepperoni Pizza</h5>
-                    <p class="card-text">Small: ₨ 900<br>Medium: ₨ 1,300<br>Large: ₨ 1,700</p>
-                    <button class="btn btn-attractive" onclick="addToCart('Pepperoni Pizza', 900)">Add to Cart</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card">
-                  <img src="Images/BBQ Chicken Pizza.jpeg" class="card-img-top" alt="BBQ Chicken Pizza">
-                  <div class="card-body">
-                    <h5 class="card-title">BBQ Chicken Pizza</h5>
-                    <p class                    <p class="card-text">Small: ₨ 850<br>Medium: ₨ 1,200<br>Large: ₨ 1,600</p>
-                    <button class="btn btn-attractive" onclick="addToCart('BBQ Chicken Pizza', 850)">Add to Cart</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card">
-                  <img src="Images/Tandoori Special Pizza.jpeg" class="card-img-top" alt="Tandoori Special Pizza">
-                  <div class="card-body">
-                    <h5 class="card-title">Tandoori Special Pizza</h5>
-                    <p class="card-text">Small: ₨ 850<br>Medium: ₨ 1,250<br>Large: ₨ 1,700</p>
-                    <button class="btn btn-attractive" onclick="addToCart('Tandoori Special Pizza', 850)">Add to Cart</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card">
-                  <img src="Images/CROWNCRUSTPIZZA.jpeg" class="card-img-top" alt="Crown Crust Pizza">
-                  <div class="card-body">
-                    <h5 class="card-title">Crown Crust Pizza</h5>
-                    <p class="card-text">Small: ₨ 850<br>Medium: ₨ 1,250<br>Large: ₨ 1,700</p>
-                    <button class="btn btn-attractive" onclick="addToCart('Crown Crust Pizza', 850)">Add to Cart</button>
-                  </div>
-                </div>
-              </div>
-            </div> <!-- END of accordion-body -->
-          </div> <!-- END of collapsePizza -->
-        </div> <!-- END of accordion-item Pizza -->
-
-        <!-- Deals Block -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingDeals">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDeals">
-              Deals
-            </button>
-          </h2>
-          <div id="collapseDeals" class="accordion-collapse collapse">
-            <div class="accordion-body row row-cols-1 row-cols-md-3 g-4">
-              <div class="col"><div class="card"><img src="Images/Cheeseburger Regular Fries Pepsi (330ml).jpeg" class="card-img-top" alt="Deal 1"><div class="card-body"><h5 class="card-title">Deal 1</h5><p class="card-text">₨ 900</p><button class="btn btn-attractive" onclick="addToCart('Deal 1', 900)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="Images/Veggie Burger + Regular Fries + Sparkling Water.jpeg" class="card-img-top" alt="Deal 2"><div class="card-body"><h5 class="card-title">Deal 2</h5><p class="card-text">₨ 1200</p><button class="btn btn-attractive" onclick="addToCart('Deal 2', 1200)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="Images/BBQ Beef Burger + Margherita Pizza (Small) + 2x Pepsi (330ml).jpeg" class="card-img-top" alt="Deal 3"><div class="card-body"><h5 class="card-title">Deal 3</h5><p class="card-text">₨ 1500</p><button class="btn btn-attractive" onclick="addToCart('Deal 3', 1500)">Add to Cart</button></div></div></div>
-              <div class="col"><div class="card"><img src="Images/Large Tandoori Special Pizza + Veggie Supreme Pizza + 1L Soft Drink.jpeg" class="card-img-top" alt="Deal 4"><div class="card-body"><h5 class="card-title">Deal 4</h5><p class="card-text">₨ 1999</p><button class="btn btn-attractive" onclick="addToCart('Deal 4', 1999)">Add to Cart</button></div></div></div>
-            </div>
-          </div>
-        </div>
+        <!-- Menu items will be dynamically injected here by menu.js -->
       </div>
     </div>
   </section>
@@ -354,6 +207,8 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="menu.js" type="module"></script>
+  <script src="cart.js" type="module"></script>
   <script>
     // Add this new function for menu navigation
     function scrollToSection(sectionId) {
@@ -391,63 +246,78 @@
 
     // Add to Cart Functionality
     function addToCart(itemName, itemPrice) {
-      alert(`${itemName} has been added to your cart for ₨ ${itemPrice}.`);
-      // Here you can implement further cart functionality as needed
-    }
-
-    // API Configuration
-    const API_URL = 'http://localhost:5000/api';
-
-    // Function to handle API calls
-    async function callApi(endpoint, method = 'GET', data = null) {
-      try {
-        const options = {
-          method,
-          headers: {
-            'Content-Type': 'application/json',
-            // Add token if user is logged in
-            ...(localStorage.getItem('token') && {
-              'Authorization': `Bearer ${localStorage.getItem('token')}`
-            })
-          }
-        };
-
-        if (data) {
-          options.body = JSON.stringify(data);
+        // Check if user is logged in
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (!currentUser) {
+            // Redirect to login page
+            window.location.href = 'LOGIN.HTML';
+            return;
         }
-
-        const response = await fetch(`${API_URL}${endpoint}`, options);
-        const result = await response.json();
-
-        if (!response.ok) {
-          throw new Error(result.message || 'Something went wrong');
-        }
-
-        return result;
-      } catch (error) {
-        console.error('API Error:', error);
-        throw error;
-      }
-    }
-
-    // Function to add item to cart
-    async function addToCart(itemName, itemPrice) {
-      try {
-        if (!localStorage.getItem('token')) {
-          window.location.href = 'LOGIN.HTML';
-          return;
-        }
-
-        await callApi('/cart/add', 'POST', {
-          menuItemId: itemName, // You'll need to use actual menu item IDs
-          quantity: 1,
-          price: itemPrice
+        // Use backend API only
+        import('./cart.js').then(cartModule => {
+            cartModule.addToCart({
+                id: itemName, // You may need to map itemName to the actual menuItemId
+                quantity: 1
+            });
         });
+    }
 
-        alert(`${itemName} has been added to your cart!`);
-      } catch (error) {
-        alert('Error adding item to cart: ' + error.message);
-      }
+    // Function to show toast message
+    function showToast(message) {
+        // Remove any existing toast
+        const existingToast = document.querySelector('.toast-message');
+        if (existingToast) {
+            existingToast.remove();
+        }
+
+        const toast = document.createElement('div');
+        toast.className = 'toast-message';
+        toast.style.position = 'fixed';
+        toast.style.bottom = '20px';
+        toast.style.right = '20px';
+        toast.style.backgroundColor = '#4CAF50';
+        toast.style.color = 'white';
+        toast.style.padding = '15px 25px';
+        toast.style.borderRadius = '5px';
+        toast.style.zIndex = '1000';
+        toast.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+        toast.innerHTML = message;
+        
+        document.body.appendChild(toast);
+        
+        // Remove toast after 3 seconds
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    }
+
+    // Update cart count in the navbar
+    function updateCartCount() {
+        try {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartCount = document.getElementById('cart-count');
+            if (cartCount) {
+                cartCount.textContent = totalItems;
+                cartCount.style.display = totalItems > 0 ? 'inline' : 'none';
+            }
+            console.log('Updated cart count:', totalItems); // Debug log
+        } catch (error) {
+            console.error('Error updating cart count:', error);
+        }
+    }
+
+    // Initialize cart count when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCartCount();
+        console.log('Page loaded, cart initialized'); // Debug log
+    });
+
+    // Function to check login status
+    function checkLoginStatus() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        console.log('Current user:', currentUser); // Debug log
+        return currentUser !== null;
     }
   </script>
 </body>

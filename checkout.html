@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Gobble Bear</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #D2B48C;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #D2B48C;
+            padding: 0.5rem 1rem;
+            border-bottom: 2px solid #8B4513;
+        }
+
+        .navbar-brand {
+            padding: 0;
+            position: absolute;
+            left: 15px;
+        }
+
+        .navbar-brand img {
+            height: 60px;
+            border-radius: 15px;
+        }
+
+        .checkout-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        .order-summary {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .payment-method {
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            border-color: #ff9800;
+            background-color: #fff8e1;
+        }
+
+        .payment-method.selected {
+            border-color: #ff9800;
+            background-color: #fff8e1;
+        }
+
+        .payment-method img {
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .form-control {
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+
+        .form-control:focus {
+            border-color: #ff9800;
+            box-shadow: 0 0 0 0.2rem rgba(255, 152, 0, 0.25);
+        }
+
+        .place-order-btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .place-order-btn:hover {
+            background-color: #f57c00;
+        }
+
+        .section-title {
+            color: #8B4513;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ff9800;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="projectcode.html">
+                <img src="Images/wildlifelogo.png" alt="Gobble Bear Logo">
+            </a>
+            <a href="cart.html" class="btn btn-outline-light">← Back to Cart</a>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="checkout-container">
+                    <h2 class="section-title">Delivery Address</h2>
+                    <form id="checkout-form">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                            <div class="error-message" id="name-error"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                            <div class="error-message" id="phone-error"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Delivery Address</label>
+                            <textarea class="form-control" id="address" rows="3" required></textarea>
+                            <div class="error-message" id="address-error"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="instructions" class="form-label">Delivery Instructions (Optional)</label>
+                            <textarea class="form-control" id="instructions" rows="2" placeholder="Any special instructions for delivery"></textarea>
+                        </div>
+
+                        <h2 class="section-title mt-5">Payment Method</h2>
+                        <div class="payment-methods">
+                            <div class="payment-method" onclick="selectPayment('cash')">
+                                <input type="radio" name="payment" value="cash" required>
+                                <img src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png" alt="Cash">
+                                Cash on Delivery
+                            </div>
+                            <div class="payment-method" onclick="selectPayment('card')">
+                                <input type="radio" name="payment" value="card">
+                                <img src="https://cdn-icons-png.flaticon.com/512/179/179457.png" alt="Card">
+                                Credit/Debit Card
+                            </div>
+                            <div class="payment-method" onclick="selectPayment('easypaisa')">
+                                <input type="radio" name="payment" value="easypaisa">
+                                <img src="https://cdn-icons-png.flaticon.com/512/4519/4519102.png" alt="EasyPaisa">
+                                EasyPaisa
+                            </div>
+                        </div>
+                        <div class="error-message" id="payment-error"></div>
+
+                        <!-- Card Payment Details -->
+                        <div id="card-details" class="payment-details" style="display: none;">
+                            <div class="mb-3">
+                                <label for="card-number" class="form-label">Card Number</label>
+                                <input type="text" class="form-control" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19">
+                                <div class="error-message" id="card-number-error"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="card-expiry" class="form-label">Expiry Date</label>
+                                        <input type="text" class="form-control" id="card-expiry" placeholder="MM/YY" maxlength="5">
+                                        <div class="error-message" id="card-expiry-error"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="card-cvv" class="form-label">CVV</label>
+                                        <input type="password" class="form-control" id="card-cvv" placeholder="123" maxlength="3">
+                                        <div class="error-message" id="card-cvv-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- EasyPaisa Payment Details -->
+                        <div id="easypaisa-details" class="payment-details" style="display: none;">
+                            <div class="mb-3">
+                                <label for="easypaisa-number" class="form-label">EasyPaisa Account Number</label>
+                                <input type="tel" class="form-control" id="easypaisa-number" placeholder="03XX XXXXXXX" maxlength="11">
+                                <div class="error-message" id="easypaisa-number-error"></div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="place-order-btn">Place Order</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="checkout-container order-summary">
+                    <h2 class="section-title">Order Summary</h2>
+                    <ul class="list-group list-group-flush" id="order-summary-items">
+                        <!-- Summary items will be injected here -->
+                    </ul>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <strong>Total (including ₨ 100 delivery):</strong>
+                        <strong id="summary-total">₨ 0</strong>
+                    </div>
+                </div>
+                <button type="submit" form="checkout-form" class="place-order-btn">Place Order</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="checkout.js" type="module"></script>
+</body>
+</html> 
